@@ -15,6 +15,8 @@ public class ShipControl : MonoBehaviour
     public enum shipState {freeMode, antiDirMode};
     public shipState currentShipState;
 
+//testing git!
+
 
     Vector2 diffVec;
     Rigidbody2D rb;
