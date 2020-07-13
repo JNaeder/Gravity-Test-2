@@ -8,7 +8,7 @@ public class GameController : MonoBehaviour
     public ShipControl spaceship;
     public GameObject mainGuy;
     public Text speedUI, distanceUI, planetNameUI;
-    public Image compassImage;
+    public Image compassImage, facingCompassImage;
     public gameState currentGameState;
 
     public enum gameState { inShip, onFoot };
@@ -97,6 +97,7 @@ public class GameController : MonoBehaviour
 
     void RotateCompass() {
         compassImage.transform.localRotation = Quaternion.Euler(0f, 0f, spaceship.FindShipAngle() - 90);
+        facingCompassImage.transform.localRotation = spaceship.transform.rotation;
 
     }
 }
