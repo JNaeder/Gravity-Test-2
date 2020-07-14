@@ -12,11 +12,14 @@ public class GameController : MonoBehaviour
     public Image compassImage, facingCompassImage;
     public Image enginerPowerImage;
     public gameState currentGameState;
+    public cameraState currentCameraState;
 
     public enum gameState { inShip, onFoot };
+    public enum cameraState {planetFocus, playerFocus};
 
 
     MainGuy mainGuyScript;
+    public CameraFollow camFollow;
 
 
     // Start is called before the first frame update
@@ -87,6 +90,17 @@ public class GameController : MonoBehaviour
 
         }
 
+        if (Input.GetKeyDown(KeyCode.M)) {
+            if (currentCameraState == cameraState.playerFocus)
+            {
+                ChangeCameraState(cameraState.planetFocus);
+            }
+            else {
+                ChangeCameraState(cameraState.playerFocus);
+            }
+
+        }
+
     }
 
 
@@ -107,6 +121,11 @@ public class GameController : MonoBehaviour
             mainGuyScript.isOnFoot = false;
 
         }
+
+    }
+
+    void ChangeCameraState(cameraState newCameraState) {
+        currentCameraState = newCameraState;
 
     }
 

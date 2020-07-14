@@ -25,12 +25,16 @@ public class CameraFollow : MonoBehaviour
     // Update is called once per frame
     void LateUpdate()
     {
-        if (gM.currentGameState == GameController.gameState.inShip)
+        if (gM.currentGameState == GameController.gameState.inShip && gM.currentCameraState == GameController.cameraState.playerFocus)
         {
             FocusOnShip();
         }
-        else if (gM.currentGameState == GameController.gameState.onFoot) {
+        else if (gM.currentGameState == GameController.gameState.onFoot && gM.currentCameraState == GameController.cameraState.playerFocus)
+        {
             FocusOnMainGuy();
+        } else {
+            MapView();
+
         }
 
 
@@ -65,6 +69,13 @@ public class CameraFollow : MonoBehaviour
 
         transform.localRotation = mainGuy.localRotation;
 
+
+    }
+
+    public void MapView() {
+        camPos = new Vector3(planet.position.x, planet.position.y, -10);
+        transform.position = camPos;
+        cam.orthographicSize = 60;
 
     }
 }
