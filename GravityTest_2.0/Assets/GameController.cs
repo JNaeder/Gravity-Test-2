@@ -2,12 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class GameController : MonoBehaviour
 {
     public ShipControl spaceship;
     public GameObject mainGuy;
-    public Text speedUI, distanceUI, planetNameUI;
+    public TextMeshProUGUI speedUI, distanceUI, planetNameUI;
     public Image compassImage, facingCompassImage;
     public Image enginerPowerImage;
     public gameState currentGameState;
@@ -42,12 +43,14 @@ public class GameController : MonoBehaviour
             speedUI.text = spaceship.ShipSpeed().ToString("F2") + " kmph";
             distanceUI.text = spaceship.DistanceFromPlanet().ToString() + " km";
             compassImage.gameObject.SetActive(true);
+            facingCompassImage.gameObject.SetActive(true);
             RotateCompass();
         }
         else if (currentGameState == gameState.onFoot) {
             speedUI.text = "n/a kmph";
             distanceUI.text = "n/a km";
             compassImage.gameObject.SetActive(false);
+            facingCompassImage.gameObject.SetActive(false);
         }
         planetNameUI.text = spaceship.currentPlanet.planetName.ToString();
     }
