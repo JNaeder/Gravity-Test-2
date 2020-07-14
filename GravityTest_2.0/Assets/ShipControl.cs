@@ -38,6 +38,8 @@ public class ShipControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
+
         if (shipControlStatus)
         {
             rb.gravityScale = 1;
