@@ -46,7 +46,7 @@ public class CameraFollow : MonoBehaviour
 
         if (spaceShipScript.isOnPlanetSurface())
         {
-            cam.orthographicSize = 3;
+            cam.orthographicSize = 5;
         }
         else
         {
@@ -61,7 +61,7 @@ public class CameraFollow : MonoBehaviour
     void FocusOnMainGuy() {
         camPos = new Vector3(mainGuy.position.x, mainGuy.position.y, -10);
         transform.position = camPos;
-        cam.orthographicSize = 2;
+        cam.orthographicSize = 3;
 
         transform.localRotation = mainGuy.localRotation;
 

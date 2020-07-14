@@ -6,13 +6,15 @@ public class ShipControl : MonoBehaviour
 {
     public Transform world, player, mainGuySpawn;
     public float rotateSpeed = 1f;
-    public float enginePower = 1f;
+    public float enginePower;
+    public float minEnginerPower = 1f;
+    public float maxEnginePower = 10f;
     public LayerMask planetLayer;
     public Planet currentPlanet;
     public bool shipControlStatus;
     public GameObject engineFire;
 
-    public enum shipState {freeMode, antiDirMode};
+    public enum shipState {freeMode, antiDirMode, dirMode};
     public shipState currentShipState;
 
 //testing git!
@@ -28,6 +30,9 @@ public class ShipControl : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         currentPlanet = world.GetComponent<Planet>();
+
+
+        enginePower = minEnginerPower;
     }
 
     // Update is called once per frame
@@ -38,6 +43,7 @@ public class ShipControl : MonoBehaviour
             rb.gravityScale = 1;
             ShipMovement();
             ShipMode();
+            SetEnginePower();
         }
         else {
             rb.gravityScale = 0;
@@ -64,22 +70,42 @@ public class ShipControl : MonoBehaviour
 
 
         if (Input.GetKeyDown(KeyCode.R)) {
-            if (currentShipState == shipState.freeMode)
+            if (currentShipState != shipState.antiDirMode)
             {
                 currentShipState = shipState.antiDirMode;
             }
-            else if (currentShipState == shipState.antiDirMode) {
+            else {
                 currentShipState = shipState.freeMode;
             }
+        }
 
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            if (currentShipState != shipState.dirMode)
+            {
+                currentShipState = shipState.dirMode;
+            }
+            else{
+                currentShipState = shipState.freeMode;
+            }
         }
     }
 
     void ShipMode() {
-        if (currentShipState == shipState.antiDirMode) {
+        if (currentShipState == shipState.antiDirMode)
+        {
             transform.rotation = Quaternion.Euler(0f, 0f, FindShipAngle() + 90);
         }
+        else if (currentShipState == shipState.dirMode) {
+            transform.rotation = Quaternion.Euler(0f, 0f, FindShipAngle() - 90);
 
+        }
+    }
+
+    void SetEnginePower() {
+        float v = Input.GetAxis("Vertical");
+        enginePower += v * Time.deltaTime * 4f;
+        enginePower = Mathf.Clamp(enginePower, minEnginerPower, maxEnginePower);
 
     }
 

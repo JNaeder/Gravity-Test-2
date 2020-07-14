@@ -9,6 +9,7 @@ public class GameController : MonoBehaviour
     public GameObject mainGuy;
     public Text speedUI, distanceUI, planetNameUI;
     public Image compassImage, facingCompassImage;
+    public Image enginerPowerImage;
     public gameState currentGameState;
 
     public enum gameState { inShip, onFoot };
@@ -31,6 +32,7 @@ public class GameController : MonoBehaviour
     {
         UpdateUI();
         CheckForControls();
+        SetEnginerPowerUI();
     }
 
 
@@ -48,6 +50,16 @@ public class GameController : MonoBehaviour
             compassImage.gameObject.SetActive(false);
         }
         planetNameUI.text = spaceship.currentPlanet.planetName.ToString();
+    }
+
+
+    void SetEnginerPowerUI() {
+        float enginePerc = spaceship.enginePower / spaceship.maxEnginePower;
+        Vector3 enginerImageScale = enginerPowerImage.transform.localScale;
+        enginerImageScale.x = enginePerc;
+        enginerPowerImage.transform.localScale = enginerImageScale;
+
+
     }
 
     void CheckForControls() {
