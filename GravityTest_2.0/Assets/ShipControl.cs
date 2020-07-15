@@ -33,7 +33,7 @@ public class ShipControl : MonoBehaviour
         currentPlanet = world.GetComponent<Planet>();
 
 
-        enginePower = maxEnginePower;
+        //enginePower = maxEnginePower;
         fuelAmount = maxFuel;
     }
 

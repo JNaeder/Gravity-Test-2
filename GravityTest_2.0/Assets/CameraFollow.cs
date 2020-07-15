@@ -55,7 +55,7 @@ public class CameraFollow : MonoBehaviour
         else
         {
             distanceFromPlanet = Vector2.Distance(spaceShip.position, planet.position);
-            distanceFromPlanet = Mathf.Clamp(distanceFromPlanet, 20f, maximumCameraZoomOut + 15f);
+            //distanceFromPlanet = Mathf.Clamp(distanceFromPlanet, 20f, maximumCameraZoomOut + 15f);
             cam.orthographicSize = distanceFromPlanet - 15;
         }
 
