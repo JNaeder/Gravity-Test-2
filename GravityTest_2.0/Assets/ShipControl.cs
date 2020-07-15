@@ -7,7 +7,7 @@ public class ShipControl : MonoBehaviour
     public Transform world, player, mainGuySpawn;
     public float rotateSpeed = 1f;
     public float enginePower;
-    public float minEnginerPower = 1f;
+    public float minEnginePower = 1f;
     public float maxEnginePower = 10f;
     public float maxFuel, fuelAmount;
     public LayerMask planetLayer;
@@ -33,24 +33,20 @@ public class ShipControl : MonoBehaviour
         currentPlanet = world.GetComponent<Planet>();
 
 
-        enginePower = minEnginerPower;
+        enginePower = maxEnginePower;
+        fuelAmount = maxFuel;
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         
 
         if (shipControlStatus)
         {
-            rb.gravityScale = 1;
             ShipMovement();
             ShipMode();
             SetEnginePower();
-        }
-        else {
-            rb.gravityScale = 0;
-
         }
 
     }
@@ -73,7 +69,7 @@ public class ShipControl : MonoBehaviour
         }
 
         h = Input.GetAxis("Horizontal");
-        transform.Rotate(new Vector3(0, 0, -h * rotateSpeed));
+        transform.Rotate(new Vector3(0, 0, -h * rotateSpeed * Time.deltaTime));
 
 
         if (Input.GetKeyDown(KeyCode.R)) {
@@ -116,7 +112,7 @@ public class ShipControl : MonoBehaviour
     void SetEnginePower() {
         float v = Input.GetAxis("Vertical");
         enginePower += v * Time.deltaTime * 4f;
-        enginePower = Mathf.Clamp(enginePower, minEnginerPower, maxEnginePower);
+        enginePower = Mathf.Clamp(enginePower, minEnginePower, maxEnginePower);
 
     }
 

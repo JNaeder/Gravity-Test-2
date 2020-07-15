@@ -944,7 +944,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0.5
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
@@ -1719,7 +1719,7 @@ MonoBehaviour:
   planetGravity: 25
   sphereOfInfulence: 0
   planetRadius: 20
-  gravityTrigger: {fileID: 1427933006}
+  gravityTrigger: {fileID: 0}
   pointEff: {fileID: 1427933005}
 --- !u!1 &1597225400
 GameObject:
@@ -1871,11 +1871,11 @@ MonoBehaviour:
   world: {fileID: 1594875303}
   player: {fileID: 1597225404}
   mainGuySpawn: {fileID: 578335481}
-  rotateSpeed: 1
+  rotateSpeed: 200
   enginePower: 1
-  minEnginerPower: 1
-  maxEnginePower: 10
-  maxFuel: 200
+  minEnginePower: 1
+  maxEnginePower: 30
+  maxFuel: 1000
   fuelAmount: 200
   planetLayer:
     serializedVersion: 2
