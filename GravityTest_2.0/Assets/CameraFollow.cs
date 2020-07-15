@@ -75,7 +75,7 @@ public class CameraFollow : MonoBehaviour
     public void MapView() {
         camPos = new Vector3(planet.position.x, planet.position.y, -10);
         transform.position = camPos;
-        cam.orthographicSize = 60;
+        cam.orthographicSize = 120;
 
     }
 }

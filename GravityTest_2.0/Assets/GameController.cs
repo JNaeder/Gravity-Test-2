@@ -11,6 +11,7 @@ public class GameController : MonoBehaviour
     public TextMeshProUGUI speedUI, distanceUI, planetNameUI;
     public Image compassImage, facingCompassImage;
     public Image enginerPowerImage;
+    public Image fuelAmountImage;
     public gameState currentGameState;
     public cameraState currentCameraState;
 
@@ -29,6 +30,7 @@ public class GameController : MonoBehaviour
 
 
         ChangeGameState(currentGameState);
+        ChangeCameraState(cameraState.playerFocus);
     }
 
     // Update is called once per frame
@@ -37,6 +39,7 @@ public class GameController : MonoBehaviour
         UpdateUI();
         CheckForControls();
         SetEnginerPowerUI();
+        SetFuelAmountUI();
     }
 
 
@@ -64,7 +67,13 @@ public class GameController : MonoBehaviour
         Vector3 enginerImageScale = enginerPowerImage.transform.localScale;
         enginerImageScale.x = enginePerc;
         enginerPowerImage.transform.localScale = enginerImageScale;
+    }
 
+    void SetFuelAmountUI() {
+        float fuelPerc = spaceship.fuelAmount / spaceship.maxFuel;
+        Vector3 fuelAmountScale = fuelAmountImage.transform.localScale;
+        fuelAmountScale.x = fuelPerc;
+        fuelAmountImage.transform.localScale = fuelAmountScale;
 
     }
 

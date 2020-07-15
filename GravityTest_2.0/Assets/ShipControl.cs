@@ -9,6 +9,7 @@ public class ShipControl : MonoBehaviour
     public float enginePower;
     public float minEnginerPower = 1f;
     public float maxEnginePower = 10f;
+    public float maxFuel, fuelAmount;
     public LayerMask planetLayer;
     public Planet currentPlanet;
     public bool shipControlStatus;
@@ -59,8 +60,12 @@ public class ShipControl : MonoBehaviour
 
         if (Input.GetKey(KeyCode.Space))
         {
-            rb.AddForce(transform.up * enginePower);
-            engineFire.SetActive(true);
+            if (fuelAmount > 0)
+            {
+                rb.AddForce(transform.up * enginePower);
+                engineFire.SetActive(true);
+                UseFuel();
+            }
         }
         else {
             engineFire.SetActive(false);
@@ -94,13 +99,17 @@ public class ShipControl : MonoBehaviour
     }
 
     void ShipMode() {
-        if (currentShipState == shipState.antiDirMode)
+        if (!isOnPlanetSurface())
         {
-            transform.rotation = Quaternion.Euler(0f, 0f, FindShipAngle() + 90);
-        }
-        else if (currentShipState == shipState.dirMode) {
-            transform.rotation = Quaternion.Euler(0f, 0f, FindShipAngle() - 90);
+            if (currentShipState == shipState.antiDirMode)
+            {
+                transform.rotation = Quaternion.Euler(0f, 0f, FindShipAngle() + 90);
+            }
+            else if (currentShipState == shipState.dirMode)
+            {
+                transform.rotation = Quaternion.Euler(0f, 0f, FindShipAngle() - 90);
 
+            }
         }
     }
 
@@ -133,6 +142,17 @@ public class ShipControl : MonoBehaviour
     public float FindShipAngle() {
         float rot_z = Mathf.Atan2(rb.velocity.y, rb.velocity.x) * Mathf.Rad2Deg;
         return rot_z;
+
+    }
+
+    void UseFuel() {
+        if (fuelAmount > 0)
+        {
+            fuelAmount -= Time.deltaTime * enginePower;
+        }
+        else {
+            fuelAmount = 0;
+        }
 
     }
 }
