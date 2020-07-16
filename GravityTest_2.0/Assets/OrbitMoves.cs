@@ -16,7 +16,7 @@ public class OrbitMoves : MonoBehaviour
     {
         if (Application.isPlaying)
         {
-            HideOrbits();
+           //    HideOrbits();
         }
     }
 

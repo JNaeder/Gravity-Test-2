@@ -36,7 +36,7 @@ public class Planet : MonoBehaviour
     }
 
 
-    Rigidbody2D[] ObjectsInInfluence() {
+    public Rigidbody2D[] ObjectsInInfluence() {
 
         Collider2D[] gObjects = Physics2D.OverlapCircleAll(transform.position, sphereOfInfulence, gravityMask);
         List<Rigidbody2D> listOfRBs = new List<Rigidbody2D>();
@@ -51,17 +51,32 @@ public class Planet : MonoBehaviour
     }
 
     void ApplyGravity(Rigidbody2D rB) {
-        Vector2 difference = transform.position - rB.transform.position;
+
+        rB.velocity += CalculateAcceleration(rB);
+
+        Vector2 newPos =   new Vector2(rB.transform.position.x, rB.transform.position.y) + rB.velocity * 0.01f;
+        rB.transform.position = newPos;
+        
+
+    }
+
+
+
+    Vector2 CalculateAcceleration(Rigidbody2D r)
+    {
+        Vector2 velocity = Vector2.zero;
+
+        Vector2 difference = transform.position - r.transform.position;
         Vector2 gravityDirection = difference.normalized;
         float distance = difference.magnitude;
 
-        float gravityForce = gravityMult * ((planetRb.mass * rB.mass) / (distance * distance));
+        float gravityForce = gravityMult * ((planetRb.mass * r.mass) / (distance * distance));
 
-        rB.AddForce(gravityDirection * gravityForce);
-
-        Debug.Log(rB.gameObject.name + " " + (gravityDirection * gravityForce));
-
+        velocity = (gravityDirection * gravityForce * 0.01f);
+        return velocity;
     }
+
+
 
 
 

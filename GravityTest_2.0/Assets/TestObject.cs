@@ -14,11 +14,17 @@ public class TestObject : MonoBehaviour
     {
         rB = GetComponent<Rigidbody2D>();
         rB.velocity = intVelocity;
-    }
+        mass = rB.mass;
 
-    // Update is called once per frame
-    void Update()
-    {
         
     }
+
+    private void FixedUpdate()
+    {
+        //Debug.Log("Real - Position: " + transform.position + " Veclocity: " + rB.velocity);
+
+        
+    }
+
+
 }
