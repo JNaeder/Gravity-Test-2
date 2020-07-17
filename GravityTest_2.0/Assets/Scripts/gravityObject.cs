@@ -5,7 +5,7 @@ using UnityEngine;
 public class gravityObject : MonoBehaviour
 {
 
-    public Rigidbody2D planet;
+    public Rigidbody2D orbitAround;
     public Vector2 initVel;
 
     Rigidbody2D rB;
@@ -21,7 +21,7 @@ public class gravityObject : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        rB.velocity += MyUniverse.CalculateGravity(planet.transform.position,planet.mass, rB.transform.position, rB.mass) * Time.deltaTime;
+        rB.velocity += MyUniverse.CalculateGravity(orbitAround.transform.position,orbitAround.mass, rB.transform.position, rB.mass) * Time.deltaTime;
 
         
     }
