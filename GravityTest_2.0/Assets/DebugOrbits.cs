@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[ExecuteInEditMode]
+
 public class DebugOrbits : MonoBehaviour
 {
     public Rigidbody2D newObject;
@@ -13,13 +13,13 @@ public class DebugOrbits : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        DrawOrbit();
     }
 
     // Update is called once per frame
     void Update()
     {
-        DrawOrbit();
+        
     }
 
 
@@ -37,10 +37,12 @@ public class DebugOrbits : MonoBehaviour
             firstObject.position = newPos;
             drawPoints[step] = newPos;
         }
+        lineRend.positionCount = drawPoints.Length;
 
         // draw orbit
         for (int i = 0; i < drawPoints.Length - 1; i++) {
             //Debug.DrawLine(drawPoints[i], drawPoints[i + 1]);
+            
             lineRend.SetPosition(i, drawPoints[i]);
         }
 

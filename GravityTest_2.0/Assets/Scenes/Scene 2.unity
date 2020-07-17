@@ -508,7 +508,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   newObject: {fileID: 78128974}
   planet: {fileID: 1594875305}
-  stepNum: 50
+  stepNum: 23
   lineRend: {fileID: 1652697150}
 --- !u!4 &1652697149
 Transform:
@@ -563,9 +563,7 @@ LineRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Positions:
-  - {x: 28.026764, y: 13.77256, z: 0}
-  - {x: 8.070362, y: 26.49107, z: 0}
+  m_Positions: []
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 1
