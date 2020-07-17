@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ShipControl : MonoBehaviour
 {
-    public Transform world, player, mainGuySpawn;
+    public Transform player, mainGuySpawn;
     public float rotateSpeed = 1f;
     public float enginePower;
     public float minEnginePower = 1f;
@@ -18,6 +18,8 @@ public class ShipControl : MonoBehaviour
     public enum shipState {freeMode, antiDirMode, dirMode};
     public shipState currentShipState;
 
+    gravityObject gravObj;
+
 //testing git!
 
 
@@ -30,7 +32,8 @@ public class ShipControl : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        currentPlanet = world.GetComponent<Planet>();
+        gravObj = GetComponent<gravityObject>();
+        
 
 
         //enginePower = maxEnginePower;
@@ -40,7 +43,10 @@ public class ShipControl : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        
+        if (gravObj.orbitAround != null)
+        {
+            currentPlanet = gravObj.orbitAround.GetComponent<Planet>();
+        }
 
         if (shipControlStatus)
         {
@@ -123,7 +129,7 @@ public class ShipControl : MonoBehaviour
     }
 
     public float DistanceFromPlanet() {
-        float distanceFromPlanet = Vector2.Distance(player.position, world.position) - currentPlanet.planetRadius - (player.localScale.x /2);
+        float distanceFromPlanet = Vector2.Distance(player.position, currentPlanet.transform.position) - currentPlanet.planetRadius - (player.localScale.x /2);
         distanceFromPlanet = Mathf.RoundToInt(distanceFromPlanet);
         return distanceFromPlanet;
     }

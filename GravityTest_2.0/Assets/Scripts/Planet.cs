@@ -9,6 +9,7 @@ public class Planet : MonoBehaviour
     public float gravityMult;
     public float sphereOfInfulence;
     public float planetRadius;
+    public bool isSun;
 
     public LayerMask gravityMask;
 
@@ -29,20 +30,23 @@ public class Planet : MonoBehaviour
 
     private void FixedUpdate()
     {
-        
+        foreach (gravityObject g in ObjectsInInfluence()) {
+            g.orbitAround = planetRb;
+
+        }
     }
 
 
-    public Rigidbody2D[] ObjectsInInfluence() {
+    public gravityObject[] ObjectsInInfluence() {
 
         Collider2D[] gObjects = Physics2D.OverlapCircleAll(transform.position, sphereOfInfulence, gravityMask);
-        List<Rigidbody2D> listOfRBs = new List<Rigidbody2D>();
+        List<gravityObject> listOfRBs = new List<gravityObject>();
         foreach (Collider2D c in gObjects) {
-            if (c.GetComponent<Rigidbody2D>() != null) {
-                listOfRBs.Add(c.GetComponent<Rigidbody2D>());
+            if (c.GetComponent<gravityObject>() != null) {
+                listOfRBs.Add(c.GetComponent<gravityObject>());
             }
         }
-        Rigidbody2D[] newRbs = listOfRBs.ToArray();
+        gravityObject[] newRbs = listOfRBs.ToArray();
         return newRbs;
         
     }

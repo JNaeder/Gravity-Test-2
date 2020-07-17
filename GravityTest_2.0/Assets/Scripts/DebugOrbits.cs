@@ -32,7 +32,7 @@ public class DebugOrbits : MonoBehaviour
 
         //simulate
         for (int step = 0; step < stepNum; step++) {
-            firstObject.velocity += MyUniverse.CalculateGravity(planet.transform.position, planet.mass, firstObject.position, firstObject.mass);
+            firstObject.velocity += MyUniverse.CalculateGravity(planet.transform.position, planet.mass, firstObject.position, firstObject.mass, planet.gravityScale);
             Vector2 newPos = firstObject.position + firstObject.velocity;
             firstObject.position = newPos;
             drawPoints[step] = newPos;
@@ -57,7 +57,7 @@ public class DebugOrbits : MonoBehaviour
 
         public void fakeBody(Rigidbody2D rB) {
             position = rB.transform.position;
-            velocity = rB.gameObject.GetComponent<gravityObject>().initVel;
+            velocity = rB.velocity;
             mass = rB.mass;
         }
 

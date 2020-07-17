@@ -6,7 +6,6 @@ public class gravityObject : MonoBehaviour
 {
 
     public Rigidbody2D orbitAround;
-    public Vector2 initVel;
 
     Rigidbody2D rB;
 
@@ -14,14 +13,16 @@ public class gravityObject : MonoBehaviour
     void Start()
     {
         rB = GetComponent<Rigidbody2D>();
-        rB.velocity = initVel;
         
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        rB.velocity += MyUniverse.CalculateGravity(orbitAround.transform.position,orbitAround.mass, rB.transform.position, rB.mass) * Time.deltaTime;
+        if (orbitAround != null)
+        {
+            rB.velocity += (MyUniverse.CalculateGravity(orbitAround.transform.position, orbitAround.mass, rB.transform.position, rB.mass, orbitAround.GetComponent<Planet>().gravityMult)) * Time.deltaTime;
+        }
 
         
     }
